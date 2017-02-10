@@ -1,6 +1,3 @@
 <resources>
     <string name="app_name">Adventure Club</string>
-    <string name="search_keyword">Enter a keyword</string>
-    <string name="button_search">Search</string>
-    <string name="kodaic">Magical Koadi</string>
 </resources>
