@@ -1,29 +1,45 @@
 package com.adenlie.adventureclub;
 
-import android.app.ListActivity;
-import android.database.Cursor;
-import android.os.Bundle;
-import android.provider.Contacts;
-import android.widget.ListAdapter;
-import android.widget.SimpleCursorAdapter;
+import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
+import android.view.ViewGroup;
+import android.widget.TextView;
 
-public class EventListAdapter extends ListActivity {
+import java.util.List;
+
+public class EventListAdapter extends RecyclerView.Adapter<EventListAdapter.ViewHolder> {
+    private List<String> events;
+
+    public static class ViewHolder extends RecyclerView.ViewHolder {
+        public TextView nameOfTheEvent;
+
+        public ViewHolder(TextView v) {
+            super(v);
+            nameOfTheEvent = v;
+        }
+    }
+
+    public EventListAdapter(List<String> events) {
+        this.events = events;
+    }
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public EventListAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        TextView name = (TextView) LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.event_name, parent, false);
 
-        setContentView(R.layout.activity_events_list);
+        ViewHolder vh = new ViewHolder(name);
+        return vh;
+    }
 
-        Cursor mCursor = this.getContentResolver().query(Contacts.People.CONTENT_URI, null, null, null, null);
-        startManagingCursor(mCursor);
+    @Override
+    public void onBindViewHolder(ViewHolder holder, int position) {
+        holder.nameOfTheEvent.setText(events.get(position));
 
-        ListAdapter adapter = new SimpleCursorAdapter(
-                this,
-                android.R.layout.two_line_list_item,
-                mCursor,
-                new String[]{Contacts.People.NAME, Contacts.People.NUMBER},
-                new int[]{android.R.id.text1, android.R.id.text2});
+    }
 
-        setListAdapter(adapter);
+    @Override
+    public int getItemCount() {
+        return events.size();
     }
 }

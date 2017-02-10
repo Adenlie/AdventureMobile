@@ -1,24 +1,33 @@
 package com.adenlie.adventureclub;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+
+import java.util.List;
+
+import static java.util.Arrays.asList;
 
 public class EventListActivity extends AppCompatActivity {
-    public final static String EXTRA_MESSAGE = "com.adenlie.adventureclub.MESSAGE";
+    private RecyclerView eventsRecyclerView;
+    private RecyclerView.Adapter eventsAdapter;
+    private RecyclerView.LayoutManager eventsLayoutManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_events_list);
-    }
+        eventsRecyclerView = (RecyclerView) findViewById(R.id.events_recycler_view);
 
-    public void showDetails(View view) {
-        Intent intent = new Intent(this, EventDetailsActivity.class);
-//        EditText editText = (EditText) findViewById(R.id.search_keyword);
-//        String message = editText.getText().toString();
-//        intent.putExtra(EXTRA_MESSAGE, message);
-        startActivity(intent);
+        eventsRecyclerView.setHasFixedSize(true);
+
+        eventsLayoutManager = new LinearLayoutManager(this);
+        eventsRecyclerView.setLayoutManager(eventsLayoutManager);
+
+        List<String> events = asList("Magical Kodai", "Delicious Allappuzha", "Misty Munnar");
+        // specify an adapter (see also next example)
+        eventsAdapter = new EventListAdapter(events);
+        eventsRecyclerView.setAdapter(eventsAdapter);
     }
 }

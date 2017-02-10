@@ -1,21 +1,7 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/events_recycler_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:scrollbars="vertical" />
 
-    <TextView
-        android:id="@+id/list_name"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Showing latest events" />
 
-    <ListView
-        android:id="@+id/event_list"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:background="@android:color/darker_gray"
-        android:drawSelectorOnTop="false" />
-
-</LinearLayout>
